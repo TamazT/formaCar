@@ -6,8 +6,9 @@ describe("formaCar tests", function () {
   let formaCar;
 
   this.beforeEach(async function () {
+    [account1, account2] = await ethers.getSigners();
     const FormaCar = await ethers.getContractFactory("formaCar");
-    formaCar = await FormaCar.deploy("tamaz", "rama");
+    formaCar = await FormaCar.deploy("tamaz", "rama", "123", account1.address);
   });
   describe("Wl mint", function () {
     it("It return wlmint close", async function () {

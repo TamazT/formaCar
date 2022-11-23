@@ -8,10 +8,15 @@ const { verify } = require("../utils/verify");
 async function main() {
   const { deploy, log } = deployments;
   const deployer =
-    "1cd6e55af3a99a6b0f33c086f77b680e9169eb5dbc82a2cec763d0c58e30d804";
+    "e1844147471c4d0cf6f530e57d16725f3780d23c9c1537c3f87e61c022db7ac5";
   log("----------------------------------------------------");
   log("Deploying formaCar and waiting for confirmations...");
-  const arguments = ["Formacarc", "car"];
+  const arguments = [
+    "Forsadma",
+    "car",
+    "https://ipfs.io/ipfs/QmVLxtgyGbcL7hpZRnAWBvNwMD8NWAKh9qqGvCXQ1z5JK5/",
+    "0x3ED13d767D4B99904230a32AA4D62b78CA2514fb",
+  ];
   const Formacar = await deploy("formaCar", {
     from: deployer,
     args: arguments,

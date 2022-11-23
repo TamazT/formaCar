@@ -9,27 +9,25 @@ contract formaCar is ERC721 {
     uint256 public tokenCounter;
     uint256 maxToWlMint = 5000;
     uint256 wlMinted;
-    uint256 publicMintPrice = 3 wei;
+    uint256 public publicMintPrice = 0.03 ether;
     uint256 private constant maxtotalSupply = 10000;
     bytes32 public MerkleRootWL;
 
     bool public wlMint = false;
     bool public publicMint = false;
 
-    address owner;
-
-    constructor(string memory name, string memory symbol) ERC721(name, symbol) {
+    constructor(
+        string memory name,
+        string memory symbol,
+        string memory _uri,
+        address _setOwner
+    ) ERC721(name, symbol, _setOwner) {
         tokenCounter = 1;
-        owner = msg.sender;
+        baseURI = _uri;
     }
 
     mapping(address => uint256) addresMintedWl;
     mapping(address => uint256) addresMintedPublic;
-
-    /* modifier onlyOwner() {
-        require(msg.sender == owner, "Only owner can call this fucntion");
-        _;
-    } */
 
     function wlMintedAlready() public view returns (uint256) {
         return wlMinted;
@@ -112,7 +110,7 @@ contract formaCar is ERC721 {
             "You reached maxtotal supply"
         );
         for (uint256 i; i < _amount; i++) {
-            _safeMint(owner, tokenCounter);
+            _safeMint(_owner, tokenCounter);
             tokenCounter++;
         }
     }
@@ -122,15 +120,15 @@ contract formaCar is ERC721 {
     }
 
     function burn(uint256 _tokenid) public onlyOwner {
-        _burn(_tokenid, owner);
+        _burn(_tokenid, _owner);
     }
 
     function checkOwner() public view returns (address) {
-        return owner;
+        return _owner;
     }
 
-    function changeOwner(address _owner) public onlyOwner {
-        owner = _owner;
+    function changeOwner(address _newowner) public onlyOwner {
+        _owner = _newowner;
     }
 
     fallback() external payable {}

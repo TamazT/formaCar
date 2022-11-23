@@ -46,6 +46,6 @@ async function mintPublic() {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(contractAddress, contractabi, signer);
-  let transactionResponse = contract.mintPublic(amount, { value: 3 });
+  let transactionResponse = contract.mintPublic(amount, { value: "0.03" });
 }
 getRootHash(wlAdresses);
